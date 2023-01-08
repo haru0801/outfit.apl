@@ -7,23 +7,20 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Post extends Model
+class Profile extends Model
 {
     use HasFactory;
     
     protected $fillable = [
-        'title',
-        'body',
-        'user_id'
+        'user_Id',
+        'username',
+        'Description',
+        'gender'
+
     ];
     
     public function user()
         {
             return $this->belongsTo(User::class);
-        }
-        
-    public function reviews()   
-        {
-            return $this->hasMany(Review::class);  
         }
 }
