@@ -32,6 +32,9 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
+                                <NavLink :href="route('post.create')" :active="route().current('post.create')">
+                                    投稿作成ページ
+                                </NavLink>
                             </div>
                         </div>
 

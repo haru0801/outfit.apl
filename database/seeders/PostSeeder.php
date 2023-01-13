@@ -16,9 +16,23 @@ class PostSeeder extends Seeder
     public function run()
     {
         DB::table('posts')->insert([
+            [
             'title' => 'top',
             'body' => 'test',
             'user_id' => '1',
-            ]);
+            ],
+            
+            [
+            'title' => 'ready',
+            'body' => 'yse',
+            'user_id' => '1',
+            ],
+            
+            [
+            'title' => 'mow',
+            'body' => 'no',
+            'user_id' => '1',
+            ],
+     ]);
     }
 }

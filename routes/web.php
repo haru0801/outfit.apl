@@ -5,7 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +16,13 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+
+Route::get("/posts/index", [PostController::class, "index"])->name('post.index');
+Route::get("/posts/create", [PostController::class, "create"])->name('post.create');
+Route::get("/posts/{post}", [PostController::class, "show"])->name('post.show');
+Route::post("/posts", [PostController::class, "store"])->name('post.store');
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
