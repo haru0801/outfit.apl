@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Inertia\Inertia;
-
+use Redirect;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,13 +14,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Post $post)
     {   
-        $posts = post::select('id', 'title', 'body',)->get();
+         return inertia("Posts/Index",["posts" => $post->get()]);
 
-        return Inertia::render('Posts/index',[
-            'posts'=> $posts
-        ]);
     }
 
     /**
@@ -28,26 +25,21 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Post $post)
     {
-        return Inertia::render('Posts/create');
+         return inertia("Posts/Create");
     }
 
     
-    public function store(PostRequest $request)
+    public function store(PostRequest $request, Post $post)
     {
-        Item::create([
-            'title' => $request->title,
-            'body'=> $request->body,
-        ]);
-        return to_route('items.index');
+        $input = $request->all();
+        $post->fill($input)->save();
+        return Redirect::route('post.show', $post->id);
     }
-
     public function show(Post $post)
     {
-        return Inertia::render('Posts/show',[
-            'post' => $post,
-        ]);
+        return inertia("Posts/Show", ["post" => $post]);
     }
 
    
