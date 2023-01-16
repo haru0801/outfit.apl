@@ -2,10 +2,17 @@
   import Authenticated from '@/Layouts/AuthenticatedLayout.vue';
   import {Link} from '@inertiajs/inertia-vue3';
   import { defineProps } from "vue";
+  import { Inertia } from '@inertiajs/inertia'
 
   const {post} = defineProps({
       post: Object
   });
+  
+   const destroy = ({id}) => {      
+        Inertia.delete(route('post.delete', {id: id}), {
+            onBefore: () => confirm('削除しますが、よろしいですか？')
+        })
+     }
 </script>
 
 <template>
@@ -30,6 +37,11 @@
 
             <div>
                 <Link :href="route('post.index')">戻る</Link>
+                <button
+                           class="px-3 bg-purple-300 hover:bg-purple-400 rounded-md"
+                           @click="destroy(post)"
+                       >削除
+                </button>
             </div>
 
         </div>

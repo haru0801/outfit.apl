@@ -25,6 +25,7 @@
                        <Link :href="route('post.show', { id: post.id })" >{{ post.title }}</Link>
                    </h2>
                    <p class="p-2">{{post.body}}</p>
+            
                </div>
            </div>
        </div>
