@@ -6,6 +6,7 @@ use App\Models\Post;
 use Inertia\Inertia;
 use Redirect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -34,6 +35,7 @@ class PostController extends Controller
     public function store(PostRequest $request, Post $post)
     {
         $input = $request->all();
+        $post['user_id'] = Auth::id();
         $post->fill($input)->save();
         return Redirect::route('post.show', $post->id);
     }
@@ -72,11 +74,10 @@ class PostController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(post $post)
-    {
+    public function delete(Post $post){
+        
         $post->delete();
-
-        return to_route(('Posts.index'));
-
+        return Redirect::route('post.index');
+        
     }
 }

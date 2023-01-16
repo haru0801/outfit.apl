@@ -22,7 +22,11 @@ use App\Http\Controllers\PostController;
 Route::get("/posts/index", [PostController::class, "index"])->name('post.index');
 Route::get("/posts/create", [PostController::class, "create"])->name('post.create');
 Route::get("/posts/{post}", [PostController::class, "show"])->name('post.show');
+Route::delete("/posts/{post}", [PostController::class, "delete"])->name('post.delete');
 Route::post("/posts", [PostController::class, "store"])->name('post.store');
+Route::get("/profiles/index", [ProfileController::class, "index"])->name('profile.index');
+Route::post("/profiles", [ProfileController::class, "store"])->name('profile.store');
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -33,16 +37,16 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/user', [UserController::class, 'index'])->name('user');
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/user', [ProfileController::class, 'edit'])->name('user.edit');
+    Route::patch('/user', [ProfileController::class, 'update'])->name('user.update');
+    Route::delete('/user', [ProfileController::class, 'destroy'])->name('user.destroy');
 });
 
 require __DIR__.'/auth.php';
