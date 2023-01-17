@@ -8,11 +8,7 @@
       post: Object
   });
   
-   const destroy = ({id}) => {      
-        Inertia.delete(route('post.delete', {id: id}), {
-            onBefore: () => confirm('削除しますが、よろしいですか？')
-        })
-     }
+   
 </script>
 
 <template>
@@ -37,11 +33,12 @@
 
             <div>
                 <Link :href="route('post.index')">戻る</Link>
-                <button
-                           class="px-3 bg-purple-300 hover:bg-purple-400 rounded-md"
-                           @click="destroy(post)"
-                       >削除
-                </button>
+                <Link :href="route('post.delete')">削除</Link>
+                <!--<button-->
+                <!--           class="px-3 bg-purple-300 hover:bg-purple-400 rounded-md"-->
+                           
+                <!--       >削除-->
+                <!--</button>-->
             </div>
 
         </div>
