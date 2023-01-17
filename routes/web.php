@@ -24,8 +24,7 @@ Route::get("/posts/create", [PostController::class, "create"])->name('post.creat
 Route::get("/posts/{post}", [PostController::class, "show"])->name('post.show');
 Route::delete("/posts/{post}", [PostController::class, "delete"])->name('post.delete');
 Route::post("/posts", [PostController::class, "store"])->name('post.store');
-Route::get("/profiles/index", [ProfileController::class, "index"])->name('profile.index');
-Route::post("/profiles", [ProfileController::class, "store"])->name('profile.store');
+
 
 
 Route::get('/', function () {
@@ -44,9 +43,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/user', [ProfileController::class, 'edit'])->name('user.edit');
-    Route::patch('/user', [ProfileController::class, 'update'])->name('user.update');
-    Route::delete('/user', [ProfileController::class, 'destroy'])->name('user.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
